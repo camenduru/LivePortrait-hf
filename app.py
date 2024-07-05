@@ -12,11 +12,14 @@ from src.gradio_pipeline import GradioPipeline
 from src.config.crop_config import CropConfig
 from src.config.argument_config import ArgumentConfig
 from src.config.inference_config import InferenceConfig
+import gdown
+import os
 
+folder_url = f"https://drive.google.com/drive/folders/1UtKgzKjFAOmZkhNK-OYT0caJ_w2XAnib"
+gdown.download_folder(url=folder_url, output="pretrained_weights", quiet=False)
 
 def partial_fields(target_class, kwargs):
     return target_class(**{k: v for k, v in kwargs.items() if hasattr(target_class, k)})
-
 
 # set tyro theme
 tyro.extras.set_accent_color("bright_cyan")
