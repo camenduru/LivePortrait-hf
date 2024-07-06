@@ -28,11 +28,13 @@ args = tyro.cli(ArgumentConfig)
 # specify configs for inference
 inference_cfg = partial_fields(InferenceConfig, args.__dict__)  # use attribute of args to initial InferenceConfig
 crop_cfg = partial_fields(CropConfig, args.__dict__)  # use attribute of args to initial CropConfig
+
 gradio_pipeline = GradioPipeline(
     inference_cfg=inference_cfg,
     crop_cfg=crop_cfg,
     args=args
 )
+ gradio_pipeline.execute_video
 # assets
 title_md = "assets/gradio_title.md"
 example_portrait_dir = "assets/examples/source"
@@ -100,8 +102,10 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                 flag_do_crop_input,
                 flag_remap_input
             ],
+            outputs=[output_image, output_image_paste_back],
             examples_per_page=5,
-            cache_examples="lazy"
+            cache_examples="lazy",
+            fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
         )
     gr.Markdown(load_description("assets/gradio_description_retargeting.md"))
     with gr.Row():
@@ -137,7 +141,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         show_progress=True
     )
     process_button_animation.click(
-        fn=gradio_pipeline.execute_video,
+        fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
         inputs=[
             image_input,
             video_input,
