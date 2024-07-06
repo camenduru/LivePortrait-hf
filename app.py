@@ -64,6 +64,17 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     with gr.Row():
         with gr.Accordion(open=True, label="Source Portrait"):
             image_input = gr.Image(type="filepath")
+            gr.Examples(
+                examples=[
+                    [osp.join(example_video_dir, "s9.jpg")],
+                    [osp.join(example_video_dir, "s6.jpg")],
+                    [osp.join(example_video_dir, "s10.jpg")],
+                    [osp.join(example_video_dir, "s5.jpg")],
+                    [osp.join(example_video_dir, "s7.jpg")],
+                ],
+                inputs=[image_input],
+                cache_examples=False,
+            )
         with gr.Accordion(open=True, label="Driving Video"):
             video_input = gr.Video()
             gr.Examples(
