@@ -66,11 +66,11 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             image_input = gr.Image(type="filepath")
             gr.Examples(
                 examples=[
-                    [osp.join(example_video_dir, "s9.jpg")],
-                    [osp.join(example_video_dir, "s6.jpg")],
-                    [osp.join(example_video_dir, "s10.jpg")],
-                    [osp.join(example_video_dir, "s5.jpg")],
-                    [osp.join(example_video_dir, "s7.jpg")],
+                    [osp.join(example_portrait_dir, "s9.jpg")],
+                    [osp.join(example_portrait_dir, "s6.jpg")],
+                    [osp.join(example_portrait_dir, "s10.jpg")],
+                    [osp.join(example_portrait_dir, "s5.jpg")],
+                    [osp.join(example_portrait_dir, "s7.jpg")],
                 ],
                 inputs=[image_input],
                 cache_examples=False,
@@ -112,6 +112,13 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     with gr.Row():
         gr.Examples(
             examples=data_examples,
+            fn=gradio_pipeline.prepare_retargeting,
+            inputs=image_input,
+            outputs=[eye_retargeting_slider, lip_retargeting_slider, retargeting_input_image],
+            examples_per_page=5,
+            cache_examples="lazy",
+        ).then(
+            fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
             inputs=[
                 image_input,
                 video_input,
@@ -119,10 +126,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                 flag_do_crop_input,
                 flag_remap_input
             ],
-            #outputs=[output_image, output_image_paste_back],
-            examples_per_page=5,
-            #cache_examples="lazy",
-            #fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
+            outputs=[output_image, output_image_paste_back],
         )
     gr.Markdown(load_description("assets/gradio_description_retargeting.md"))
     with gr.Row():
