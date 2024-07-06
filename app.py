@@ -148,10 +148,4 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         outputs=[eye_retargeting_slider, lip_retargeting_slider, retargeting_input_image]
     )
 
-##########################################################
-
-demo.launch(
-    server_name=args.server_name,
-    server_port=args.server_port,
-    share=args.share,
-)
+demo.launch()
