@@ -66,9 +66,14 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         with gr.Accordion(open=True, label="Driving Video"):
             video_input = gr.Video()
             gr.Examples(
-                examples=[[osp.join(example_portrait_dir, "d0.mp4")], [osp.join(example_video_dir, "d5.mp4")], [osp.join(example_video_dir, "d6.mp4"), [osp.join(example_video_dir, "d7.mp4")]],
+                examples=[
+                    [osp.join(example_portrait_dir, "d0.mp4")],
+                    [osp.join(example_video_dir, "d5.mp4")],
+                    [osp.join(example_video_dir, "d6.mp4")],
+                    [osp.join(example_video_dir, "d7.mp4")],
+                ],
                 inputs=[video_input],
-                cache_examples=False
+                cache_examples=False,
             )
     gr.Markdown(load_description("assets/gradio_description_animation.md"))
     with gr.Row():
