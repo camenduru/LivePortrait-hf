@@ -112,12 +112,6 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     with gr.Row():
         gr.Examples(
             examples=data_examples,
-            fn=gradio_pipeline.prepare_retargeting,
-            inputs=image_input,
-            outputs=[eye_retargeting_slider, lip_retargeting_slider, retargeting_input_image],
-            examples_per_page=5,
-            cache_examples="lazy",
-        ).then(
             fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
             inputs=[
                 image_input,
@@ -127,6 +121,8 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                 flag_remap_input
             ],
             outputs=[output_image, output_image_paste_back],
+            examples_per_page=5,
+            cache_examples="lazy",
         )
     gr.Markdown(load_description("assets/gradio_description_retargeting.md"))
     with gr.Row():
