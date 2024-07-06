@@ -66,7 +66,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         with gr.Accordion(open=True, label="Driving Video"):
             video_input = gr.Video()
             gr.Examples(
-                examples=[[osp.join(example_portrait_dir, "s9.jpg")], [osp.join(example_video_dir, "d0.mp4")], [osp.join(example_video_dir, "d6.mp4")]],
+                examples=[[osp.join(example_portrait_dir, "d0.mp4")], [osp.join(example_video_dir, "d5.mp4")], [osp.join(example_video_dir, "d6.mp4"), [osp.join(example_video_dir, "d7.mp4")]],
                 inputs=[video_input],
                 cache_examples=False
             )
@@ -102,10 +102,10 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                 flag_do_crop_input,
                 flag_remap_input
             ],
-            outputs=[output_image, output_image_paste_back],
+            #outputs=[output_image, output_image_paste_back],
             examples_per_page=5,
-            cache_examples="lazy",
-            fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
+            #cache_examples="lazy",
+            #fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
         )
     gr.Markdown(load_description("assets/gradio_description_retargeting.md"))
     with gr.Row():
