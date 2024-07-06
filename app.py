@@ -14,6 +14,7 @@ from src.config.argument_config import ArgumentConfig
 from src.config.inference_config import InferenceConfig
 import gdown
 import os
+import spaces
 
 folder_url = f"https://drive.google.com/drive/folders/1UtKgzKjFAOmZkhNK-OYT0caJ_w2XAnib"
 gdown.download_folder(url=folder_url, output="pretrained_weights", quiet=False)
@@ -67,7 +68,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             video_input = gr.Video()
             gr.Examples(
                 examples=[
-                    [osp.join(example_portrait_dir, "d0.mp4")],
+                    [osp.join(example_video_dir, "d0.mp4")],
                     [osp.join(example_video_dir, "d5.mp4")],
                     [osp.join(example_video_dir, "d6.mp4")],
                     [osp.join(example_video_dir, "d7.mp4")],
