@@ -65,7 +65,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             video_input = gr.Video()
             gr.Examples(
                 examples=[[osp.join(example_portrait_dir, "s9.jpg")], [osp.join(example_video_dir, "d0.mp4")], [osp.join(example_video_dir, "d6.mp4")]],
-                intpus=[video_input],
+                inputs=[video_input],
                 cache_examples=False
             )
     gr.Markdown(load_description("assets/gradio_description_animation.md"))
