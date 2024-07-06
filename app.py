@@ -63,6 +63,11 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             image_input = gr.Image(type="filepath")
         with gr.Accordion(open=True, label="Driving Video"):
             video_input = gr.Video()
+            gr.Examples(
+                examples=[[osp.join(example_portrait_dir, "s9.jpg")], [osp.join(example_video_dir, "d0.mp4")], [osp.join(example_video_dir, "d6.mp4")]],
+                intpus=[video_input],
+                cache_examples=False
+            )
     gr.Markdown(load_description("assets/gradio_description_animation.md"))
     with gr.Row():
         with gr.Accordion(open=True, label="Animation Options"):
@@ -95,7 +100,8 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                 flag_do_crop_input,
                 flag_remap_input
             ],
-            examples_per_page=5
+            examples_per_page=5,
+            cache_examples="lazy"
         )
     gr.Markdown(load_description("assets/gradio_description_retargeting.md"))
     with gr.Row():
