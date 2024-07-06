@@ -34,7 +34,7 @@ gradio_pipeline = GradioPipeline(
     crop_cfg=crop_cfg,
     args=args
 )
- gradio_pipeline.execute_video
+
 # assets
 title_md = "assets/gradio_title.md"
 example_portrait_dir = "assets/examples/source"
