@@ -1,5 +1,5 @@
 ---
-title: Liveportrait
+title: Live Portrait 
 emoji: 📈
 colorFrom: red
 colorTo: yellow
