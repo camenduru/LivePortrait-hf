@@ -6,8 +6,8 @@ __pycache__/
 *$py.class
 
 # Model weights
-**/*.pth
-**/*.onnx
+#**/*.pth
+#**/*.onnx
 
 # Ipython notebook
 *.ipynb
