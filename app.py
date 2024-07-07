@@ -151,7 +151,8 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                 output_image_paste_back.render()
     # binding functions for buttons
     process_button_retargeting.click(
-        fn=gradio_pipeline.execute_image,
+        # fn=gradio_pipeline.execute_image,
+        fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_image)(*args),
         inputs=[eye_retargeting_slider, lip_retargeting_slider],
         outputs=[output_image, output_image_paste_back],
         show_progress=True
@@ -174,4 +175,8 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         outputs=[eye_retargeting_slider, lip_retargeting_slider, retargeting_input_image]
     )
 
-demo.launch()
+demo.launch(
+    server_port=args.server_port,
+    share=args.share,
+    server_name=args.server_name
+)

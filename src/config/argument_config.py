@@ -39,6 +39,6 @@ class ArgumentConfig(PrintableConfig):
     ####################################
 
     ########## gradio arguments ##########
-    server_port: Annotated[int, tyro.conf.arg(aliases=["-p"])]  = 8890
-    share: bool = True
-    server_name: str = "0.0.0.0"
+    server_port: Annotated[int, tyro.conf.arg(aliases=["-p"])]  = 7860
+    share: bool = False
+    server_name: str = None # one can set "0.0.0.0" on local
