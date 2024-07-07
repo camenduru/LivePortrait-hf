@@ -61,7 +61,7 @@ class GradioPipeline(LivePortraitPipeline):
             self.cropper.update_config(self.args.__dict__)
             # video driven animation
             video_path, video_path_concat = self.execute(self.args)
-            gr.Info("Run successfully!", duration=2)
+            # gr.Info("Run successfully!", duration=2)
             return video_path, video_path_concat,
         else:
             raise gr.Error("The input source portrait or driving video hasn't been prepared yet 💥!", duration=5)
@@ -96,7 +96,7 @@ class GradioPipeline(LivePortraitPipeline):
             out = self.live_portrait_wrapper.warp_decode(self.f_s_user, self.x_s_user, x_d_new)
             out = self.live_portrait_wrapper.parse_output(out['out'])[0]
             out_to_ori_blend = paste_back(out, self.crop_M_c2o, self.img_rgb, self.mask_ori)
-            gr.Info("Run successfully!", duration=2)
+            # gr.Info("Run successfully!", duration=2)
             return out, out_to_ori_blend
 
 
@@ -104,7 +104,7 @@ class GradioPipeline(LivePortraitPipeline):
         """ for single image retargeting
         """
         if input_image_path is not None:
-            gr.Info("Upload successfully!", duration=2)
+            # gr.Info("Upload successfully!", duration=2)
             self.start_prepare = True
             inference_cfg = self.live_portrait_wrapper.cfg
             ######## process source portrait ########
