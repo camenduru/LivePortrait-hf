@@ -39,3 +39,11 @@ assets/examples/driving/d0.mp4 filter=lfs diff=lfs merge=lfs -text
 assets/examples/driving/d3.mp4 filter=lfs diff=lfs merge=lfs -text
 assets/examples/driving/d6.mp4 filter=lfs diff=lfs merge=lfs -text
 assets/examples/driving/d9.mp4 filter=lfs diff=lfs merge=lfs -text
+pretrained_weights/liveportrait/retargeting_models/stitching_retargeting_module.pth filter=lfs diff=lfs merge=lfs -text
+pretrained_weights/liveportrait/base_models/appearance_feature_extractor.pth filter=lfs diff=lfs merge=lfs -text
+pretrained_weights/liveportrait/base_models/motion_extractor.pth filter=lfs diff=lfs merge=lfs -text
+pretrained_weights/liveportrait/base_models/spade_generator.pth filter=lfs diff=lfs merge=lfs -text
+pretrained_weights/liveportrait/base_models/warping_module.pth filter=lfs diff=lfs merge=lfs -text
+pretrained_weights/insightface/models/buffalo_l/2d106det.onnx filter=lfs diff=lfs merge=lfs -text
+pretrained_weights/insightface/models/buffalo_l/det_10g.onnx filter=lfs diff=lfs merge=lfs -text
+pretrained_weights/liveportrait/landmark.onnx filter=lfs diff=lfs merge=lfs -text
