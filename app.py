@@ -16,8 +16,8 @@ import gdown
 import os
 import spaces
 
-folder_url = f"https://drive.google.com/drive/folders/1UtKgzKjFAOmZkhNK-OYT0caJ_w2XAnib"
-gdown.download_folder(url=folder_url, output="pretrained_weights", quiet=False)
+# folder_url = f"https://drive.google.com/drive/folders/1UtKgzKjFAOmZkhNK-OYT0caJ_w2XAnib"
+# gdown.download_folder(url=folder_url, output="pretrained_weights", quiet=False)
 
 def partial_fields(target_class, kwargs):
     return target_class(**{k: v for k, v in kwargs.items() if hasattr(target_class, k)})

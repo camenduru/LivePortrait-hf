@@ -5,6 +5,8 @@ config dataclass used for inference
 """
 
 import os.path as osp
+import cv2
+from numpy import ndarray
 from dataclasses import dataclass
 from typing import Literal, Tuple
 from .base_config import PrintableConfig, make_abs_path
@@ -38,7 +40,7 @@ class InferenceConfig(PrintableConfig):
 
     flag_write_result: bool = True  # whether to write output video
     flag_pasteback: bool = True  # whether to paste-back/stitch the animated face cropping from the face-cropping space to the original image space
-    mask_crop = None
+    mask_crop: ndarray = cv2.imread(make_abs_path('../utils/resources/mask_template.png'), cv2.IMREAD_COLOR)
     flag_write_gif: bool = False
     size_gif: int = 256
     ref_max_shape: int = 1280
