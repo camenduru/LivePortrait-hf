@@ -131,11 +131,11 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             examples_per_page=5,
             cache_examples=False,
         )
-    gr.Markdown(load_description("assets/gradio_description_retargeting.md"))
-    with gr.Row():
+    gr.Markdown(load_description("assets/gradio_description_retargeting.md"), visible=False)
+    with gr.Row(visible=False):
         eye_retargeting_slider.render()
         lip_retargeting_slider.render()
-    with gr.Row():
+    with gr.Row(visible=False):
         process_button_retargeting = gr.Button("🚗 Retargeting", variant="primary")
         process_button_reset_retargeting = gr.ClearButton(
             [
@@ -147,7 +147,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             ],
             value="🧹 Clear"
         )
-    with gr.Row():
+    with gr.Row(visible=False):
         with gr.Column():
             with gr.Accordion(open=True, label="Retargeting Input"):
                 retargeting_input_image.render()
