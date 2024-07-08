@@ -13,6 +13,7 @@ from src.config.crop_config import CropConfig
 from src.config.argument_config import ArgumentConfig
 from src.config.inference_config import InferenceConfig
 import spaces
+import cv2
 
 # import gdown
 # folder_url = f"https://drive.google.com/drive/folders/1UtKgzKjFAOmZkhNK-OYT0caJ_w2XAnib"
@@ -42,6 +43,18 @@ def gpu_wrapped_execute_video(*args, **kwargs):
 @spaces.GPU(duration=240)
 def gpu_wrapped_execute_image(*args, **kwargs):
     return gradio_pipeline.execute_image(*args, **kwargs)
+
+def is_square_video(video_path):
+    video = cv2.VideoCapture(video_path)
+    
+    width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    
+    video.release()
+    if width != height:
+        raise gr.Error("Error: the video does not have a square aspect ratio. We currently only support square videos")
+    
+    return gr.update(visible=True)
 
 # assets
 title_md = "assets/gradio_title.md"
@@ -94,9 +107,9 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                 inputs=[video_input],
                 cache_examples=False,
             )
-    gr.Markdown(load_description("assets/gradio_description_animation.md"))
     with gr.Row():
-        with gr.Accordion(open=False, label="Animation Options"):
+        with gr.Accordion(open=False, label="Animation Instructions and Options"):
+            gr.Markdown(load_description("assets/gradio_description_animation.md"))
             with gr.Row():
                 flag_relative_input = gr.Checkbox(value=True, label="relative motion")
                 flag_do_crop_input = gr.Checkbox(value=True, label="do crop")
@@ -181,6 +194,11 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         fn=gradio_pipeline.prepare_retargeting,
         inputs=image_input,
         outputs=[eye_retargeting_slider, lip_retargeting_slider, retargeting_input_image]
+    )
+    video_input.upload(
+        fn=is_square_video,
+        inputs=video_input,
+        outputs=video_input
     )
 
 demo.launch(
