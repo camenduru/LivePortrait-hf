@@ -96,7 +96,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             )
     gr.Markdown(load_description("assets/gradio_description_animation.md"))
     with gr.Row():
-        with gr.Accordion(open=True, label="Animation Options"):
+        with gr.Accordion(open=False, label="Animation Options"):
             with gr.Row():
                 flag_relative_input = gr.Checkbox(value=True, label="relative motion")
                 flag_do_crop_input = gr.Checkbox(value=True, label="do crop")

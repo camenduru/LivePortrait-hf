@@ -83,17 +83,19 @@ class GradioPipeline(LivePortraitPipeline):
                     duration=5
                 )
         else:
+            x_s_user = self.x_s_user.to("cuda")
+            f_s_user = self.f_s_user.to("cuda")
             # ∆_eyes,i = R_eyes(x_s; c_s,eyes, c_d,eyes,i)
             combined_eye_ratio_tensor = self.live_portrait_wrapper.calc_combined_eye_ratio([[input_eye_ratio]], self.source_lmk_user)
-            eyes_delta = self.live_portrait_wrapper.retarget_eye(self.x_s_user, combined_eye_ratio_tensor)
+            eyes_delta = self.live_portrait_wrapper.retarget_eye(x_s_user, combined_eye_ratio_tensor)
             # ∆_lip,i = R_lip(x_s; c_s,lip, c_d,lip,i)
             combined_lip_ratio_tensor = self.live_portrait_wrapper.calc_combined_lip_ratio([[input_lip_ratio]], self.source_lmk_user)
-            lip_delta = self.live_portrait_wrapper.retarget_lip(self.x_s_user, combined_lip_ratio_tensor)
-            num_kp = self.x_s_user.shape[1]
+            lip_delta = self.live_portrait_wrapper.retarget_lip(x_s_user, combined_lip_ratio_tensor)
+            num_kp = x_s_user.shape[1]
             # default: use x_s
-            x_d_new = self.x_s_user + eyes_delta.reshape(-1, num_kp, 3) + lip_delta.reshape(-1, num_kp, 3)
+            x_d_new = x_s_user + eyes_delta.reshape(-1, num_kp, 3) + lip_delta.reshape(-1, num_kp, 3)
             # D(W(f_s; x_s, x′_d))
-            out = self.live_portrait_wrapper.warp_decode(self.f_s_user, self.x_s_user, x_d_new)
+            out = self.live_portrait_wrapper.warp_decode(f_s_user, x_s_user, x_d_new)
             out = self.live_portrait_wrapper.parse_output(out['out'])[0]
             out_to_ori_blend = paste_back(out, self.crop_M_c2o, self.img_rgb, self.mask_ori)
             # gr.Info("Run successfully!", duration=2)
