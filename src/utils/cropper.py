@@ -36,7 +36,7 @@ class Cropper(object):
         device_id = kwargs.get('device_id', 0)
         self.landmark_runner = LandmarkRunner(
             ckpt_path=make_abs_path('../../pretrained_weights/liveportrait/landmark.onnx'),
-            onnx_provider='cuda',
+            onnx_provider='cpu',
             device_id=device_id
         )
         self.landmark_runner.warmup()
@@ -44,7 +44,7 @@ class Cropper(object):
         self.face_analysis_wrapper = FaceAnalysisDIY(
             name='buffalo_l',
             root=make_abs_path('../../pretrained_weights/insightface'),
-            providers=["CUDAExecutionProvider"]
+            providers=["CPUExecutionProvider"]
         )
         self.face_analysis_wrapper.prepare(ctx_id=device_id, det_size=(512, 512))
         self.face_analysis_wrapper.warmup()
