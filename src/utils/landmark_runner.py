@@ -27,7 +27,7 @@ class LandmarkRunner(object):
     """landmark runner"""
     def __init__(self, **kwargs):
         ckpt_path = kwargs.get('ckpt_path')
-        onnx_provider = kwargs.get('onnx_provider', 'cuda')  # 默认用cuda
+        onnx_provider = 'cpu' #run on cpu for it to work with ZeroGPU // kwargs.get('onnx_provider', 'cuda')  # 默认用cuda
         device_id = kwargs.get('device_id', 0)
         self.dsize = kwargs.get('dsize', 224)
         self.timer = Timer()

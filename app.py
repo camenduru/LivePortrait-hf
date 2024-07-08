@@ -35,6 +35,14 @@ gradio_pipeline = GradioPipeline(
     args=args
 )
 
+@spaces.GPU(duration=240)
+def gpu_wrapped_execute_video(*args, **kwargs):
+    return gradio_pipeline.execute_video(*args, **kwargs)
+
+@spaces.GPU(duration=240)
+def gpu_wrapped_execute_image(*args, **kwargs):
+    return gradio_pipeline.execute_image(*args, **kwargs)
+
 # assets
 title_md = "assets/gradio_title.md"
 example_portrait_dir = "assets/examples/source"
@@ -111,7 +119,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     with gr.Row():
         gr.Examples(
             examples=data_examples,
-            fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
+            fn=gpu_wrapped_execute_video,
             inputs=[
                 image_input,
                 video_input,
@@ -121,7 +129,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             ],
             outputs=[output_image, output_image_paste_back],
             examples_per_page=5,
-            cache_examples="lazy",
+            cache_examples=False,
         )
     gr.Markdown(load_description("assets/gradio_description_retargeting.md"))
     with gr.Row():
@@ -152,13 +160,13 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     # binding functions for buttons
     process_button_retargeting.click(
         # fn=gradio_pipeline.execute_image,
-        fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_image)(*args),
+        fn=gpu_wrapped_execute_image,
         inputs=[eye_retargeting_slider, lip_retargeting_slider],
         outputs=[output_image, output_image_paste_back],
         show_progress=True
     )
     process_button_animation.click(
-        fn=lambda *args: spaces.GPU()(gradio_pipeline.execute_video)(*args),
+        fn=gpu_wrapped_execute_video,
         inputs=[
             image_input,
             video_input,
