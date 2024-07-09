@@ -47,3 +47,5 @@ pretrained_weights/liveportrait/base_models/warping_module.pth filter=lfs diff=l
 pretrained_weights/insightface/models/buffalo_l/2d106det.onnx filter=lfs diff=lfs merge=lfs -text
 pretrained_weights/insightface/models/buffalo_l/det_10g.onnx filter=lfs diff=lfs merge=lfs -text
 pretrained_weights/liveportrait/landmark.onnx filter=lfs diff=lfs merge=lfs -text
+assets/examples/driving/d14.mp4 filter=lfs diff=lfs merge=lfs -text
+assets/examples/source/s12.jpg filter=lfs diff=lfs merge=lfs -text

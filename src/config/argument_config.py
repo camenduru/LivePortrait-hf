@@ -8,6 +8,7 @@ import os.path as osp
 from dataclasses import dataclass
 import tyro
 from typing_extensions import Annotated
+from typing import Optional
 from .base_config import PrintableConfig, make_abs_path
 
 
@@ -41,4 +42,4 @@ class ArgumentConfig(PrintableConfig):
     ########## gradio arguments ##########
     server_port: Annotated[int, tyro.conf.arg(aliases=["-p"])]  = 7860
     share: bool = False
-    server_name: str = None # one can set "0.0.0.0" on local
+    server_name: Optional[str] = None  # one can set "0.0.0.0" on local

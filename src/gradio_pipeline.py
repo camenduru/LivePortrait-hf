@@ -10,7 +10,6 @@ from .utils.io import load_img_online
 from .utils.rprint import rlog as log
 from .utils.crop import prepare_paste_back, paste_back
 from .utils.camera import get_rotation_matrix
-from .utils.retargeting_utils import calc_eye_close_ratio, calc_lip_close_ratio
 
 def update_args(args, user_args):
     """update the args according to user inputs
@@ -111,4 +110,3 @@ class GradioPipeline(LivePortraitPipeline):
         else:
             # when press the clear button, go here
             raise gr.Error("The retargeting input hasn't been prepared yet 💥!", duration=5)
-

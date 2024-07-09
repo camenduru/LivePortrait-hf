@@ -46,14 +46,14 @@ def gpu_wrapped_execute_image(*args, **kwargs):
 
 def is_square_video(video_path):
     video = cv2.VideoCapture(video_path)
-    
+
     width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    
+
     video.release()
     if width != height:
         raise gr.Error("Error: the video does not have a square aspect ratio. We currently only support square videos")
-    
+
     return gr.update(visible=True)
 
 # assets
@@ -91,6 +91,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                     [osp.join(example_portrait_dir, "s10.jpg")],
                     [osp.join(example_portrait_dir, "s5.jpg")],
                     [osp.join(example_portrait_dir, "s7.jpg")],
+                    [osp.join(example_portrait_dir, "s12.jpg")],
                 ],
                 inputs=[image_input],
                 cache_examples=False,
@@ -100,6 +101,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             gr.Examples(
                 examples=[
                     [osp.join(example_video_dir, "d0.mp4")],
+                    [osp.join(example_video_dir, "d14.mp4")],
                     [osp.join(example_video_dir, "d5.mp4")],
                     [osp.join(example_video_dir, "d6.mp4")],
                     [osp.join(example_video_dir, "d7.mp4")],
@@ -128,7 +130,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                 output_video_concat.render()
     with gr.Row():
         # Examples
-        gr.Markdown("## You could choose the examples below ⬇️")
+        gr.Markdown("## You could also choose the examples below by one click ⬇️")
     with gr.Row():
         gr.Examples(
             examples=data_examples,
