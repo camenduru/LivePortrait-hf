@@ -53,7 +53,7 @@ class GradioPipeline(LivePortraitPipeline):
             # gr.Info("Run successfully!", duration=2)
             return video_path, video_path_concat,
         else:
-            raise gr.Error("The input source portrait or driving video hasn't been prepared yet 💥!", duration=5)
+            raise gr.Error("Please upload the source portrait and driving video 🤗🤗🤗", duration=5)
 
     def execute_image(self, input_eye_ratio: float, input_lip_ratio: float, input_image, flag_do_crop = True):
         """ for single image retargeting
