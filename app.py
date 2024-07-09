@@ -72,7 +72,7 @@ data_examples = [
 # Define components first
 eye_retargeting_slider = gr.Slider(minimum=0, maximum=0.8, step=0.01, label="target eyes-open ratio")
 lip_retargeting_slider = gr.Slider(minimum=0, maximum=0.8, step=0.01, label="target lip-open ratio")
-retargeting_input_image = gr.Image(type="numpy")
+retargeting_input_image = gr.Image(type="filepath")
 output_image = gr.Image(type="numpy")
 output_image_paste_back = gr.Image(type="numpy")
 output_video = gr.Video()
@@ -144,11 +144,11 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             examples_per_page=5,
             cache_examples=False,
         )
-    gr.Markdown(load_description("assets/gradio_description_retargeting.md"), visible=False)
-    with gr.Row(visible=False):
+    gr.Markdown(load_description("assets/gradio_description_retargeting.md"), visible=True)
+    with gr.Row(visible=True):
         eye_retargeting_slider.render()
         lip_retargeting_slider.render()
-    with gr.Row(visible=False):
+    with gr.Row(visible=True):
         process_button_retargeting = gr.Button("🚗 Retargeting", variant="primary")
         process_button_reset_retargeting = gr.ClearButton(
             [
@@ -160,10 +160,21 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             ],
             value="🧹 Clear"
         )
-    with gr.Row(visible=False):
+    with gr.Row(visible=True):
         with gr.Column():
             with gr.Accordion(open=True, label="Retargeting Input"):
                 retargeting_input_image.render()
+                gr.Examples(
+                    examples=[
+                        [osp.join(example_portrait_dir, "s9.jpg")],
+                        [osp.join(example_portrait_dir, "s6.jpg")],
+                        [osp.join(example_portrait_dir, "s10.jpg")],
+                        [osp.join(example_portrait_dir, "s5.jpg")],
+                        [osp.join(example_portrait_dir, "s7.jpg")],
+                    ],
+                    inputs=[retargeting_input_image],
+                    cache_examples=False,
+                )
         with gr.Column():
             with gr.Accordion(open=True, label="Retargeting Result"):
                 output_image.render()
@@ -174,7 +185,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     process_button_retargeting.click(
         # fn=gradio_pipeline.execute_image,
         fn=gpu_wrapped_execute_image,
-        inputs=[eye_retargeting_slider, lip_retargeting_slider],
+        inputs=[eye_retargeting_slider, lip_retargeting_slider, retargeting_input_image, flag_do_crop_input],
         outputs=[output_image, output_image_paste_back],
         show_progress=True
     )
@@ -190,11 +201,11 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         outputs=[output_video, output_video_concat],
         show_progress=True
     )
-    image_input.change(
-        fn=gradio_pipeline.prepare_retargeting,
-        inputs=image_input,
-        outputs=[eye_retargeting_slider, lip_retargeting_slider, retargeting_input_image]
-    )
+    # image_input.change(
+    #     fn=gradio_pipeline.prepare_retargeting,
+    #     inputs=image_input,
+    #     outputs=[eye_retargeting_slider, lip_retargeting_slider, retargeting_input_image]
+    # )
     video_input.upload(
         fn=is_square_video,
         inputs=video_input,
