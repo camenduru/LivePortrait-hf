@@ -51,3 +51,5 @@ assets/examples/driving/d14.mp4 filter=lfs diff=lfs merge=lfs -text
 assets/examples/source/s12.jpg filter=lfs diff=lfs merge=lfs -text
 assets/examples/driving/d14_trim.mp4 filter=lfs diff=lfs merge=lfs -text
 assets/examples/driving/d6_trim.mp4 filter=lfs diff=lfs merge=lfs -text
+assets/examples/driving/d15.mp4 filter=lfs diff=lfs merge=lfs -text
+assets/examples/driving/d16.mp4 filter=lfs diff=lfs merge=lfs -text
