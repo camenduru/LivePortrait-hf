@@ -173,6 +173,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
                         [osp.join(example_portrait_dir, "s10.jpg")],
                         [osp.join(example_portrait_dir, "s5.jpg")],
                         [osp.join(example_portrait_dir, "s7.jpg")],
+                        [osp.join(example_portrait_dir, "s12.jpg")],
                     ],
                     inputs=[retargeting_input_image],
                     cache_examples=False,
