@@ -12,7 +12,6 @@ from src.gradio_pipeline import GradioPipeline
 from src.config.crop_config import CropConfig
 from src.config.argument_config import ArgumentConfig
 from src.config.inference_config import InferenceConfig
-import spaces
 import cv2
 
 # import gdown
@@ -36,11 +35,9 @@ gradio_pipeline = GradioPipeline(
     args=args
 )
 
-@spaces.GPU(duration=240)
 def gpu_wrapped_execute_video(*args, **kwargs):
     return gradio_pipeline.execute_video(*args, **kwargs)
 
-@spaces.GPU(duration=240)
 def gpu_wrapped_execute_image(*args, **kwargs):
     return gradio_pipeline.execute_image(*args, **kwargs)
 
@@ -217,6 +214,6 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
 
 demo.launch(
     server_port=args.server_port,
-    share=args.share,
+    share=True,
     server_name=args.server_name
 )
