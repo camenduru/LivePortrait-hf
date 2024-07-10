@@ -4,9 +4,8 @@
 Pipeline of LivePortrait
 """
 
-# TODO:
-# 1. 当前假定所有的模板都是已经裁好的，需要修改下
-# 2. pick样例图 source + driving
+import torch
+torch.backends.cudnn.benchmark = True # disable CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR warning
 
 import cv2
 import numpy as np
