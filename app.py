@@ -64,8 +64,8 @@ data_examples = [
     [osp.join(example_portrait_dir, "s9.jpg"), osp.join(example_video_dir, "d0.mp4"), True, True, True, True],
     [osp.join(example_portrait_dir, "s6.jpg"), osp.join(example_video_dir, "d0.mp4"), True, True, True, True],
     [osp.join(example_portrait_dir, "s10.jpg"), osp.join(example_video_dir, "d0.mp4"), True, True, True, True],
-    [osp.join(example_portrait_dir, "s5.jpg"), osp.join(example_video_dir, "d15.mp4"), True, True, True, True],
-    [osp.join(example_portrait_dir, "s7.jpg"), osp.join(example_video_dir, "d16.mp4"), True, True, True, True],
+    [osp.join(example_portrait_dir, "s5.jpg"), osp.join(example_video_dir, "d18.mp4"), True, True, True, True],
+    [osp.join(example_portrait_dir, "s7.jpg"), osp.join(example_video_dir, "d19.mp4"), True, True, True, True],
 ]
 #################### interface logic ####################
 
@@ -101,8 +101,8 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             gr.Examples(
                 examples=[
                     [osp.join(example_video_dir, "d0.mp4")],
-                    [osp.join(example_video_dir, "d15.mp4")],
-                    [osp.join(example_video_dir, "d16.mp4")],
+                    [osp.join(example_video_dir, "d18.mp4")],
+                    [osp.join(example_video_dir, "d19.mp4")],
                     [osp.join(example_video_dir, "d14_trim.mp4")],
                     [osp.join(example_video_dir, "d6_trim.mp4")],
                 ],

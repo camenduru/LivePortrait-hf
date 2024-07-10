@@ -62,7 +62,7 @@ class GradioPipeline(LivePortraitPipeline):
         f_s_user, x_s_user, source_lmk_user, crop_M_c2o, mask_ori, img_rgb = \
         self.prepare_retargeting(input_image, flag_do_crop)
 
-        if input_eye_ratio is None or input_eye_ratio is None:
+        if input_eye_ratio is None or input_lip_ratio is None:
             raise gr.Error("Invalid ratio input 💥!", duration=5)
         else:
             x_s_user = x_s_user.to("cuda")
@@ -109,4 +109,4 @@ class GradioPipeline(LivePortraitPipeline):
             return f_s_user, x_s_user, source_lmk_user, crop_M_c2o, mask_ori, img_rgb
         else:
             # when press the clear button, go here
-            raise gr.Error("The retargeting input hasn't been prepared yet 💥!", duration=5)
+            raise gr.Error("Please upload a source portrait as the retargeting input 🤗🤗🤗", duration=5)
